@@ -1,24 +1,32 @@
-// A simple program that computes the square root of a number
 #include <iostream>
-#include <string>
-#include "stock.h"
-#include "student.h"
-#include "person.h"
-// should we include the MathFunctions header?
-
-
-int main(int argc, char* argv[])
+#include "Astar.h"
+using namespace std;
+ 
+int main()
 {
-  Stock s1;
-  Student s2;
-  Person p;
-  
-  p.setName("blake");
-  std::cout << p.getName() << std::endl;
-  s1.acquire("blake", 1000, 10);
-  s1.show();
-
-  s2.acquire("yi", 1000, 10);
-  s2.show();
-  return 0;
+	//初始化地图，用二维矩阵代表地图，1表示障碍物，0表示可通
+	vector<vector<int>> maze={
+		{1,1,1,1,1,1,1,1,1,1,1,1},
+		{1,0,0,1,1,0,1,0,0,0,0,1},
+		{1,0,0,1,1,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,1,0,0,1,1,1},
+		{1,1,1,0,0,0,0,0,1,1,0,1},
+		{1,1,0,1,0,0,0,0,0,0,0,1},
+		{1,0,1,0,0,0,0,1,0,0,0,1},
+		{1,1,1,1,1,1,1,1,1,1,1,1}
+	};
+	Astar astar;
+	astar.InitAstar(maze);
+ 
+	//设置起始和结束点
+	Point start(1,1);
+	Point end(6,10);
+	//A*算法找寻路径
+	list<Point *> path=astar.GetPath(start,end,false);
+	//打印
+	for(auto &p:path)
+		cout<<'('<<p->x<<','<<p->y<<')'<<endl;
+ 
+	system("pause");
+	return 0;
 }

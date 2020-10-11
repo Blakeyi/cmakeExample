@@ -11,16 +11,17 @@ set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} -g)
 
 # 将当前目录下所有源文件赋值给DIR_SRC
 aux_source_directory(. DIR_SRC)
-set(LIB stock student person)
+set(LIB stock student person astar)
 
 # 增加子目录路径,不能叠加写？
 add_subdirectory(src/stock)
 add_subdirectory(src/student)
 add_subdirectory(src/person)
+add_subdirectory(src/astar)
 
 
 # 增加头文件包含目录
-set(SUB_DIR src/stock src/student src/person)
+set(SUB_DIR src/stock src/student src/person src/astar)
 include_directories(${SUB_DIR})
 
 # 设置二进制文件名称依赖
